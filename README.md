@@ -135,6 +135,18 @@ npm run dev
 ```
 Open your browser at `http://localhost:5173` to interact with the JARVIS HUD Dashboard!
 
+### 3. Environment Settings Reference
+
+| Setting | Default Value | Description |
+| :--- | :--- | :--- |
+| `JARVIS_LANGUAGE` | `hi-IN` | Primary assistant interaction language |
+| `JARVIS_SECONDARY_LANGUAGE` | `en-IN` | Secondary fallback language |
+| `JARVIS_AUTO_LANGUAGE_DETECTION` | `true` | Auto-detect language from prompt input |
+| `JARVIS_DEBUG_MODE` | `false` | Enable verbose internal event logging |
+| `GEMINI_API_KEY` | `""` | Google Gemini API key (runs offline mock if empty) |
+| `LLM_MODEL` | `gemini-2.5-flash` | Primary generative LLM model |
+| `MAX_AGENT_ITERATIONS` | `10` | Maximum agent planning & execution steps |
+
 ---
 
 ## 🧪 Running Tests
