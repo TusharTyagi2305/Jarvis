@@ -57,7 +57,10 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - **`SAFE`**: Read-only operations, system telemetry, memory lookups, and browser navigations execute automatically.
    - **`CONFIRM`**: Modifying operations (file creation/deletion, memory updates, downloads) request explicit user token confirmation via the UI modal.
    - **`DANGEROUS`**: Dangerous commands (unrestricted shell execution, formatting, root deletion) require explicit double-step authorization.
-   - **Audit Logging**: Comprehensive JSONL audit log history recorded in `logs/audit.log`.
+8. **Dedicated ResponseFormatter & Clean Output Guarantee**:
+   - Intercepts raw Python dictionaries, status codes (`200`, `404`), JSON schemas, and Playwright tracebacks before TTS or user chat display.
+   - Converts internal tool execution results into natural conversational Hindi/English sentences.
+   - Ensures the user **NEVER** hears or sees raw debug output like `{'success': True, 'url': ...}`.
 
 ---
 
