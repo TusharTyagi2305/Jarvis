@@ -69,28 +69,39 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 
 ```
 Jarvis/
+├── .env                      # Local environment configuration
 ├── .env.example              # Template environment file
-├── pyproject.toml            # Backend dependencies
+├── pyproject.toml            # Backend dependencies & pytest config
+├── jarvis.spec               # PyInstaller executable build spec
 ├── README.md                 # Project documentation
 ├── jarvis/
-│   ├── config.py             # Strongly typed settings
-│   ├── cli.py                # Interactive CLI mode
-│   ├── security/             # PermissionEngine & AuditLogger
-│   ├── brain/                # Gemini & Mock LLM providers
-│   ├── tools/                # Tool Registry & 11 System/File/Terminal tools
-│   ├── orchestrator/         # Planner & 14-Step Agent Execution Loop
+│   ├── config.py             # Pydantic settings schema & settings manager
+│   ├── cli.py                # Command-Line interactive mode
+│   ├── command_bus.py        # Central event and command dispatching
+│   ├── context.py            # ActiveWorkingContext & resolve_pronouns
+│   ├── desktop.py            # Windows desktop application control
+│   ├── launcher.py           # Single-instance application launcher
+│   ├── tray.py               # Windows System Tray icon & control menu
+│   ├── security/             # PermissionEngine, AuditLogger & TerminalClassifier
+│   ├── brain/                # Gemini Provider, Mock Provider & ResponseFormatter
+│   ├── tools/                # Registry & 14 System, File, Vision, Memory tools
+│   ├── voice/                # STT, TTS, Wake Word detector & Sounddevice listener
+│   ├── vision/               # Screenshot OCR & Gemini 2.5 Screen Analyzer
+│   ├── memory/               # SQLite Provider & Semantic working memory
+│   ├── orchestrator/         # JarvisOrchestrator, TaskPlanEngine & Agent Loop
 │   └── api/                  # FastAPI App, REST Routes & WebSocket Manager (/ws)
 ├── frontend/
-│   ├── index.html
-│   ├── package.json
+│   ├── package.json          # React, Vite, Lucide-React dependencies
+│   ├── vite.config.ts        # Vite configuration & proxy settings
 │   ├── src/
 │   │   ├── components/       # Header, JarvisCore, Telemetry, ActivityFeed, Chat, Console, ConfirmationModal, SettingsModal
 │   │   ├── hooks/            # useWebSocket, useTelemetry
 │   │   ├── services/         # REST & WebSocket API client
 │   │   ├── pages/            # Dashboard HUD
-│   │   ├── index.css         # Dark Sci-Fi HUD aesthetics & animations
-│   │   └── App.tsx
-└── tests/                    # 16 unit & integration tests (pytest)
+│   │   └── index.css         # Dark Sci-Fi HUD aesthetics & Glassmorphism
+├── docs/                     # Architecture, installation & security docs
+├── installer/                # Inno Setup Windows installer script (.iss)
+└── tests/                    # 59 Pytest unit & integration test suite
 ```
 
 ---
