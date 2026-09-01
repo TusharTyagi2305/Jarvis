@@ -149,6 +149,38 @@ Open your browser at `http://localhost:5173` to interact with the JARVIS HUD Das
 
 ---
 
+## 🏗 System Architecture & Execution Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant Voice as Voice Manager (STT/TTS)
+    participant UI as React HUD Dashboard
+    participant Orchestrator as JarvisOrchestrator
+    participant Context as ActiveWorkingContext
+    participant Formatter as ResponseFormatter
+    participant Tools as Tool Registry
+    participant LLM as Google Gemini 2.5
+
+    User->>Voice: "Jarvis YouTube kholo" / "Hasmob002 search karo"
+    Voice->>Voice: Detect wake word ("Ji sir?")
+    Voice->>Orchestrator: Send request text
+    UI->>Orchestrator: WebSocket message / REST prompt
+    Orchestrator->>Context: resolve_pronouns(user_request)
+    Context-->>Orchestrator: Enriched contextual request
+    Orchestrator->>LLM: Generate plan & tool selection
+    LLM-->>Orchestrator: Return tool_call requests
+    Orchestrator->>Tools: Execute selected tool (Playwright/Desktop/System)
+    Tools-->>Orchestrator: Return raw ToolResult dictionary
+    Orchestrator->>Formatter: format_final_response(tool_result)
+    Formatter-->>Orchestrator: 1-Sentence natural Hindi/Hinglish text
+    Orchestrator->>UI: Stream WebSocket state event & natural text
+    Orchestrator->>Voice: Speak natural response via TTS ("YouTube खोल दिया.")
+```
+
+---
+
 ## 🧪 Running Tests
 
 Execute the backend test suite:
