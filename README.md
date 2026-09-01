@@ -39,7 +39,12 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 3. **File System Management**:
    - `read_file`, `create_file`, `create_folder`, `search_files`, `rename_move_file`, `delete_file`.
 
-4. **Safe Terminal Execution**:
+6. **Playwright Browser Automation & Session Reuse**:
+   - Smart persistent browser session reuse to prevent opening duplicate windows.
+   - Built-in smart selectors for YouTube search, channel navigation, video playback, and web browsing.
+   - Comprehensive browser tools: `browser_open`, `browser_navigate`, `browser_search`, `browser_click`, `browser_type`, `browser_scroll`, `browser_screenshot`, and `browser_download`.
+
+7. **Safe Terminal Execution**:
    - `terminal_command`: PowerShell/cmd execution sandbox with output capturing and dangerous keyword filtering.
 
 5. **Security & Permission Engine**:
