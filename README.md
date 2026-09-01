@@ -196,14 +196,20 @@ sequenceDiagram
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Testing & Quality Assurance
 
-Execute the backend test suite:
+Execute the complete backend test suite (59 unit tests covering 11 modules):
 ```bash
 python -m pytest
 ```
 
-Build the frontend production bundle:
+Test coverage includes:
+- `test_response_formatter.py`: Hindi/Hinglish language detection & zero raw dict leak verification.
+- `test_voice.py`: Speech synthesis & low-CPU listener energy calculation.
+- `test_context.py`: Multi-turn pronoun resolution (`"iska"`, `"channel kholo"`).
+- `test_desktop.py`, `test_browser.py`, `test_vision.py`, `test_memory.py`, `test_permissions.py`, `test_tools.py`, `test_websocket.py`.
+
+Build the React frontend production bundle:
 ```bash
 cd frontend
 npm run build
