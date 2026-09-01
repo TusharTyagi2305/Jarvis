@@ -217,11 +217,19 @@ npm run build
 
 ---
 
-## 🗺 Roadmap & Progress
+## 🗺 Roadmap & Completed Milestones
 
-- [x] **Phase 1**: Core Modular Architecture, Tool System, Security Engine, Gemini LLM Abstraction, Agent Loop, REST API & CLI.
-- [x] **Phase 2**: Futuristic React Dashboard, Circular ARC Core Animations, WebSockets `/ws`, Live Telemetry & Confirmation UI.
-- [ ] **Phase 3**: Voice Module (STT, TTS, Wake Word Activation).
-- [ ] **Phase 4**: Playwright Browser Agent.
-- [ ] **Phase 5**: Computer Vision & Screen Understanding.
-- [ ] **Phase 6**: Vector-based Semantic Memory.
+- [x] **Phase 1**: Core Modular Architecture, Tool Registry System, 3-Tier Security Engine, Gemini LLM Abstraction, Agent Loop, REST API & CLI.
+- [x] **Phase 2**: Futuristic Glassmorphism React Dashboard, Circular ARC Core Animations, WebSockets `/ws`, Live Telemetry & Confirmation Modal.
+- [x] **Phase 3**: Voice Module (STT, TTS Provider, `"Ji sir?"` Wake Word Activation, Sounddevice Low-CPU loop).
+- [x] **Phase 4**: Playwright Browser Agent & Tab Reuse Engine (`browser_navigate`, `browser_search`, `browser_click`).
+- [x] **Phase 5**: Computer Vision & Multimodal Screen Understanding (`screen_capture`, Gemini 2.5 `screen_analyze`).
+- [x] **Phase 6**: Persistent Memory Subsystem (`data/memory/jarvis_memory.db` SQLite & Semantic Working Memory).
+- [x] **Phase 7**: Production System Tray Integration & Single-Instance Windows Launcher.
+- [x] **Phase 8**: Hindi-First Natural Conversational Intelligence & Dedicated ResponseFormatter (Zero raw debug dict leaks).
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
