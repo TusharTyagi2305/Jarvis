@@ -39,6 +39,11 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 3. **File System Management**:
    - `read_file`, `create_file`, `create_folder`, `search_files`, `rename_move_file`, `delete_file`.
 
+5. **Screen Vision & Computer Multimodal Understanding**:
+   - `screen_capture`: Instant full desktop or active window capture.
+   - `screen_analyze`: Multimodal AI analysis powered by Gemini 2.5 Vision for UI understanding.
+   - `screen_find_element`: Bounding box detection for clicking buttons and UI controls.
+
 6. **Playwright Browser Automation & Session Reuse**:
    - Smart persistent browser session reuse to prevent opening duplicate windows.
    - Built-in smart selectors for YouTube search, channel navigation, video playback, and web browsing.
