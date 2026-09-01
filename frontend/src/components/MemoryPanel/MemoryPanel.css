@@ -1,0 +1,110 @@
+.memory-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.memory-count-badge {
+  margin-left: auto;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.memory-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memory-search-input {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
+.category-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.cat-chip {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--bg-card-border);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cat-chip.active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(0, 243, 255, 0.08);
+}
+
+.memory-records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.no-memories {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.memory-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.mem-category {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(0, 243, 255, 0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.mem-content {
+  color: var(--text-main);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mem-del-btn {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mem-del-btn:hover {
+  color: var(--accent-red);
+}

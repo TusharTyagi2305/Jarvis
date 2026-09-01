@@ -1,0 +1,57 @@
+.settings-dialog {
+  width: 90%;
+  max-width: 520px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: modal-slide-in 0.25s ease-out;
+}
+
+.settings-icon {
+  font-size: 1.2rem;
+  color: var(--accent-cyan);
+}
+
+.settings-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setting-group label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.setting-input, .setting-select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  color: var(--text-primary);
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.setting-input:focus, .setting-select:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.setting-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

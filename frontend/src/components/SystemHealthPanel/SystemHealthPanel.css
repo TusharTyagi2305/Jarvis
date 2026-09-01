@@ -1,0 +1,48 @@
+.health-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.version-badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.subsystems-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.subsystem-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 4px;
+  font-size: 0.76rem;
+}
+
+.sub-name {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.sub-status.ready {
+  color: var(--accent-green);
+  font-weight: 700;
+}
+
+.sub-status.degraded {
+  color: var(--accent-yellow);
+  font-weight: 700;
+}

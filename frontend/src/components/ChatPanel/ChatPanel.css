@@ -1,0 +1,92 @@
+.chat-panel {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 240px;
+}
+
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+  max-height: 320px;
+  padding-right: 4px;
+}
+
+.chat-empty {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.chat-message {
+  padding: 10px 12px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 85%;
+  font-size: 0.85rem;
+}
+
+.msg-user {
+  align-self: flex-end;
+  background: rgba(0, 102, 255, 0.2);
+  border: 1px solid rgba(0, 102, 255, 0.4);
+}
+
+.msg-jarvis {
+  align-self: flex-start;
+  background: rgba(0, 243, 255, 0.08);
+  border: 1px solid rgba(0, 243, 255, 0.25);
+}
+
+.msg-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.msg-user .msg-sender { color: var(--accent-cyan); }
+.msg-jarvis .msg-sender { color: var(--text-secondary); }
+
+.msg-time {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.msg-body {
+  color: var(--text-primary);
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.chat-confirmation-box {
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px dashed var(--accent-amber);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conf-warn {
+  font-size: 0.72rem;
+  font-weight: bold;
+  color: var(--accent-amber);
+}
+
+.conf-msg {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+}

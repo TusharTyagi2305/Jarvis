@@ -1,0 +1,138 @@
+.command-console-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.command-console {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  width: 100%;
+}
+
+.input-prefix {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.hud-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-hud);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.hud-input::placeholder {
+  color: var(--text-muted);
+}
+
+.console-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.voice-status-badge {
+  font-family: var(--font-hud);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.badge-idle {
+  background: rgba(13, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+.badge-listening {
+  background: rgba(0, 243, 255, 0.15);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+  animation: pulse-glow 1.5s infinite alternate;
+}
+
+.badge-speaking {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--accent-green);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
+}
+
+.badge-active {
+  background: rgba(0, 162, 255, 0.15);
+  color: #00a2ff;
+}
+
+.badge-processing {
+  background: rgba(255, 170, 0, 0.15);
+  color: var(--accent-amber);
+}
+
+.badge-error {
+  background: rgba(255, 51, 85, 0.15);
+  color: var(--accent-red);
+  box-shadow: 0 0 12px rgba(255, 51, 85, 0.3);
+}
+
+.mic-btn {
+  font-size: 1.1rem;
+  background: transparent;
+  border: 1px solid var(--bg-card-border);
+  color: var(--accent-cyan);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mic-btn:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px var(--accent-cyan);
+}
+
+.mic-btn.listening {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  box-shadow: 0 0 18px var(--accent-red);
+  animation: pulse-fast 1s infinite alternate;
+}
+
+.mic-btn.permission-alert {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  background: rgba(255, 51, 85, 0.1);
+}
+
+.submit-btn {
+  padding: 6px 18px;
+}
+
+.mic-permission-banner {
+  font-family: var(--font-hud);
+  font-size: 0.75rem;
+  color: var(--accent-red);
+  background: rgba(255, 51, 85, 0.1);
+  border: 1px solid rgba(255, 51, 85, 0.3);
+  border-radius: 6px;
+  padding: 8px 14px;
+  text-align: center;
+}

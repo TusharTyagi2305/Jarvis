@@ -1,0 +1,77 @@
+.dashboard-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 340px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "core core core"
+    "telemetry chat activity";
+  gap: 16px;
+  flex: 1;
+}
+
+.core-section {
+  grid-area: core;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  padding: 24px 20px 20px 20px;
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.05) 0%, rgba(13, 20, 36, 0.6) 100%);
+}
+
+.telemetry-section {
+  grid-area: telemetry;
+}
+
+.chat-section {
+  grid-area: chat;
+}
+
+.activity-section {
+  grid-area: activity;
+}
+
+.console-section {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "core"
+      "telemetry"
+      "chat"
+      "activity";
+  }
+}
+
+.dashboard-container.minimal-hud-mode {
+  max-width: 540px;
+  margin: 0 auto;
+  gap: 12px;
+  padding: 12px;
+}
+
+.minimal-hud-mode .dashboard-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.minimal-hud-mode .telemetry-section,
+.minimal-hud-mode .chat-section,
+.minimal-hud-mode .activity-section {
+  display: none !important;
+}
