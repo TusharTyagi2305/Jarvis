@@ -181,6 +181,21 @@ sequenceDiagram
 
 ---
 
+## 📡 API Reference
+
+### REST Endpoints
+- `GET /health` - Health check & server status.
+- `POST /process` - Process a natural language request payload: `{"request": "Notepad kholo"}`.
+- `POST /confirm` - Confirm a pending tool action: `{"token": "xyz", "approved": true}`.
+- `GET /system/info` - Get real-time system metrics (CPU, RAM, Disk, Battery).
+
+### WebSocket Endpoint (`ws://localhost:8000/ws`)
+- **State Events**: Emits agent state transitions (`IDLE`, `PLANNING`, `EXECUTING`, `WAITING`, `COMPLETED`).
+- **Tool Events**: Emits `ToolStartedEvent`, `ToolCompletedEvent`, and `ActivityFeedEvent`.
+- **Confirmation Events**: Emits `ConfirmationRequiredEvent` for interactive approvals.
+
+---
+
 ## 🧪 Running Tests
 
 Execute the backend test suite:
