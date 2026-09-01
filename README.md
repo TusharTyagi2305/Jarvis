@@ -33,8 +33,9 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 2. **System & Computer Control**:
    - `get_system_info`: Real-time CPU, RAM, Disk, OS, & Battery metrics via `psutil`.
    - `take_screenshot`: Captures high-res screen images to disk.
-   - `open_application`: Launches desktop applications (Chrome, VS Code, Notepad, Calc, etc.).
-   - `close_application`: Terminates target running processes cleanly.
+   - `open_application`: Launches desktop applications (Chrome, VS Code, Notepad, Calculator, PyCharm, etc.).
+   - `close_application`: Terminates target running processes cleanly by process name or PID.
+   - `terminal_command`: Safe Windows PowerShell and Command Prompt sandbox with dangerous command validation.
 
 3. **File System Management**:
    - `read_file`, `create_file`, `create_folder`, `search_files`, `rename_move_file`, `delete_file`.
