@@ -39,7 +39,11 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 3. **File System Management**:
    - `read_file`, `create_file`, `create_folder`, `search_files`, `rename_move_file`, `delete_file`.
 
-5. **Screen Vision & Computer Multimodal Understanding**:
+5. **Persistent Memory Subsystem**:
+   - `memory_save`, `memory_search`, `memory_get`, `memory_update`, `memory_delete`, `memory_list`, `memory_forget`.
+   - SQLite backed persistent storage (`data/memory/jarvis_memory.db`) with semantic keyword search and retention policies.
+
+6. **Screen Vision & Computer Multimodal Understanding**:
    - `screen_capture`: Instant full desktop or active window capture.
    - `screen_analyze`: Multimodal AI analysis powered by Gemini 2.5 Vision for UI understanding.
    - `screen_find_element`: Bounding box detection for clicking buttons and UI controls.
