@@ -17,7 +17,12 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - Iron-Man style natural responses capped to 1 concise sentence by default (e.g., `"Notepad खोल दिया."`, `"hasmob002 ke results mil gaye."`).
    - Proper noun protection ensuring tech terms (YouTube, VS Code, GitHub, Notepad) remain pristine.
 
-2. **Futuristic HUD React Dashboard**:
+2. **Voice Subsystem & Low-CPU Audio Engine**:
+   - Wake Word Activation responding in natural Hindi: **`"Ji sir?"`**.
+   - Dual TTS Provider support (`pyttsx3` offline speech and `gTTS` cloud speech synthesis).
+   - Optimized Sounddevice Listener loop utilizing numpy array energy calculation with yielding sleep intervals to ensure **0-2% CPU usage when idle**.
+
+3. **Futuristic HUD React Dashboard**:
    - Central Animated Glowing **ARC Core** (`IDLE`, `LISTENING`, `PROCESSING`, `PLANNING`, `EXECUTING`, `WAITING`, `COMPLETED`, `ERROR` state transitions).
    - Real-Time WebSocket streaming (`/ws`) for live task steps, tool executions, and system events.
    - System Telemetry panel (CPU, RAM, Disk, Battery, OS).
