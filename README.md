@@ -12,7 +12,12 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 
 ## 🌟 Primary Capabilities
 
-1. **Futuristic HUD React Dashboard (Phase 2)**:
+1. **Hindi-First & Natural Conversational Intelligence**:
+   - Native support for Hindi (`hi-IN`), Hinglish, and English with automatic language detection (`JARVIS_AUTO_LANGUAGE_DETECTION=true`).
+   - Iron-Man style natural responses capped to 1 concise sentence by default (e.g., `"Notepad खोल दिया."`, `"hasmob002 ke results mil gaye."`).
+   - Proper noun protection ensuring tech terms (YouTube, VS Code, GitHub, Notepad) remain pristine.
+
+2. **Futuristic HUD React Dashboard**:
    - Central Animated Glowing **ARC Core** (`IDLE`, `LISTENING`, `PROCESSING`, `PLANNING`, `EXECUTING`, `WAITING`, `COMPLETED`, `ERROR` state transitions).
    - Real-Time WebSocket streaming (`/ws`) for live task steps, tool executions, and system events.
    - System Telemetry panel (CPU, RAM, Disk, Battery, OS).
