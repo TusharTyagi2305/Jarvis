@@ -1,6 +1,12 @@
-# JARVIS — Personal AI Desktop Agent
+# 🤖 JARVIS — Personal AI Desktop Agent
 
-An Iron-Man-inspired personal desktop AI assistant built in Python and React for Windows. JARVIS understands natural language requests, plans multi-step tasks, safely executes system commands via a 3-tier permission engine, interfaces with Google Gemini, and features a futuristic sci-fi HUD React Dashboard with real-time WebSockets.
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white)
+![React](https://img.shields.io/badge/React-18-cyan?logo=react&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-teal?logo=fastapi&logoColor=white)
+![Language](https://img.shields.io/badge/Language-Hindi%20%7C%20Hinglish%20%7C%20English-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, and React for Windows. JARVIS features natural Hindi-first conversational intelligence, autonomous multi-step planning, safe system command execution via a 3-tier permission engine, Google Gemini 2.5 integration, and a futuristic sci-fi Glassmorphism HUD Dashboard with real-time WebSockets.
 
 ---
 
