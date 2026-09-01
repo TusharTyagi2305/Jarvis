@@ -53,11 +53,11 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - Built-in smart selectors for YouTube search, channel navigation, video playback, and web browsing.
    - Comprehensive browser tools: `browser_open`, `browser_navigate`, `browser_search`, `browser_click`, `browser_type`, `browser_scroll`, `browser_screenshot`, and `browser_download`.
 
-7. **Safe Terminal Execution**:
-   - `terminal_command`: PowerShell/cmd execution sandbox with output capturing and dangerous keyword filtering.
-
-5. **Security & Permission Engine**:
-   - 3-Tier Security model (`SAFE`, `CONFIRM`, `DANGEROUS`).
+7. **Security & 3-Tier Permission Engine**:
+   - **`SAFE`**: Read-only operations, system telemetry, memory lookups, and browser navigations execute automatically.
+   - **`CONFIRM`**: Modifying operations (file creation/deletion, memory updates, downloads) request explicit user token confirmation via the UI modal.
+   - **`DANGEROUS`**: Dangerous commands (unrestricted shell execution, formatting, root deletion) require explicit double-step authorization.
+   - **Audit Logging**: Comprehensive JSONL audit log history recorded in `logs/audit.log`.
 
 ---
 
