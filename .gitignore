@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.env
+
+# Data, Memory, Logs & Temp
+data/
+downloads/
+screenshots/
+scratch/
+logs/
+Projects/
+*.log
+
+# Node / React Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+node_modules/
+
+# Testing
+.pytest_cache/
