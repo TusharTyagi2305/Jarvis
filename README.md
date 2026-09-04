@@ -246,3 +246,5 @@ npm run build
 ## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- Commit 7/30: docs: detail system control tools (get_system_info, open_application) -->
