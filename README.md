@@ -249,6 +249,7 @@ Build the React frontend production bundle:
 ```bash
 cd frontend
 npm run build
+# Output generated in frontend/dist/
 ```
 
 ---
