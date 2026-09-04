@@ -234,7 +234,7 @@ sequenceDiagram
 
 ## 🧪 Testing & Quality Assurance
 
-Execute the complete backend test suite (59 unit tests covering 11 modules):
+Execute the complete backend test suite (60 unit tests covering 12 modules):
 ```bash
 python -m pytest
 ```
