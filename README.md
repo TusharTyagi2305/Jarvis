@@ -35,7 +35,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - Optimized Sounddevice Listener loop utilizing numpy array energy calculation with yielding sleep intervals to ensure **0-2% CPU usage when idle**.
 
 3. **Futuristic HUD React Dashboard**:
-   - Central Animated Glowing **ARC Core** (`IDLE`, `LISTENING`, `PROCESSING`, `PLANNING`, `EXECUTING`, `WAITING`, `COMPLETED`, `ERROR` state transitions).
+   - Sci-Fi Animated Glowing **ARC Core** (`IDLE`, `LISTENING`, `PROCESSING`, `PLANNING`, `EXECUTING`, `WAITING`, `COMPLETED`, `ERROR` state transitions).
    - Real-Time WebSocket streaming (`/ws`) for live task steps, tool executions, and system events.
    - System Telemetry panel (CPU, RAM, Disk, Battery, OS).
    - Activity Feed for step-by-step tool execution progress.
