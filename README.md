@@ -63,7 +63,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 
 6. **Playwright Browser Automation & Session Reuse**:
    - Persistent Chromium session reuse to prevent opening duplicate windows.
-   - Built-in smart selectors for YouTube search, channel navigation, video playback, and web browsing.
+   - Built-in smart selectors with fallback for YouTube search, channel navigation, video playback, and web browsing.
    - Comprehensive browser tools: `browser_open`, `browser_navigate`, `browser_search`, `browser_click`, `browser_type`, `browser_scroll`, `browser_screenshot`, and `browser_download`.
 
 7. **Security & 3-Tier Permission Engine**:
