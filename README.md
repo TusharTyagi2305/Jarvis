@@ -255,6 +255,13 @@ npm run build
 
 ---
 
+## 📜 Recent Changelog
+
+- **v1.2.0**: Added Dual-Pass STT (`hi-IN` + `en-IN`), auto-healing browser fallback, and microphone unpause hook.
+- **v1.1.0**: Clean Hindi ResponseFormatter and 1-sentence concise Iron-Man conversational persona.
+
+---
+
 ## 🗺 Roadmap & Completed Milestones
 
 - [x] **Phase 1**: Core Modular Architecture, Tool Registry System, 3-Tier Security Engine, Gemini LLM Abstraction, Agent Loop, REST API & CLI.
