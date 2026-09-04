@@ -267,6 +267,16 @@ npm run build
 
 ---
 
+## ❓ Frequently Asked Questions (FAQ)
+
+**Q: Does JARVIS work without Gemini API Key?**
+*A: Yes, JARVIS automatically uses MockLLMProvider for local offline testing.*
+
+**Q: Which languages are supported?**
+*A: Native Hindi (`hi-IN`), Hinglish, and English with dynamic language switching.*
+
+---
+
 ## 🔧 Troubleshooting & Diagnostics
 
 - **Microphone not listening?** Verify `VOICE_ENABLED=true` and check Windows Privacy microphone settings.
