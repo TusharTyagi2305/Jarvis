@@ -54,7 +54,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 
 5. **Persistent Memory Subsystem**:
    - `memory_save`, `memory_search`, `memory_get`, `memory_update`, `memory_delete`, `memory_list`, `memory_forget`.
-   - SQLite backed persistent storage (`data/memory/jarvis_memory.db`) with semantic keyword search and retention policies.
+   - SQLite 3 backed long-term persistent storage (`data/memory/jarvis_memory.db`) with semantic keyword search and retention policies.
 
 6. **Screen Vision & Computer Multimodal Understanding**:
    - `screen_capture`: Instant full desktop or active window capture.
