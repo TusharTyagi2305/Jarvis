@@ -267,6 +267,14 @@ npm run build
 
 ---
 
+## 🔧 Troubleshooting & Diagnostics
+
+- **Microphone not listening?** Verify `VOICE_ENABLED=true` and check Windows Privacy microphone settings.
+- **Browser tab closing?** JARVIS automatically falls back to system browser if Playwright context closes.
+- **WebSocket disconnected?** Ensure FastAPI backend server is running on port `8000`.
+
+---
+
 ## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
