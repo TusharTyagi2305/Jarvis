@@ -175,6 +175,14 @@ Open your browser at `http://localhost:5173` to interact with the JARVIS HUD Das
 
 ---
 
+## 🧠 Context & Multi-Turn Pronoun Resolution
+
+JARVIS uses `ActiveWorkingContext` to maintain multi-turn context:
+- *"Hasmob002 search karo"* -> sets active channel target.
+- *"Iska pehla video chalao"* -> resolves `iska` to `Hasmob002` automatically.
+
+---
+
 ## 🏗 System Architecture & Execution Flow
 
 ```mermaid
