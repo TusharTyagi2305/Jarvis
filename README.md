@@ -268,6 +268,14 @@ npm run build
 
 ---
 
+## 🤝 Contributing Guidelines
+
+1. Fork the repository & create a feature branch (`git checkout -b feature/cool-tool`).
+2. Follow clean Python PEP8 coding conventions.
+3. Run `python -m pytest` before submitting pull requests.
+
+---
+
 ## ⚡ Performance & Resource Usage
 
 - **Idle CPU**: < 2% CPU utilization on Intel Core i5/i7/i9.
