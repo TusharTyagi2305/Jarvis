@@ -197,6 +197,8 @@ sequenceDiagram
 ## 📡 API Reference
 
 ### REST Endpoints
+- `GET /` - Root status and API metadata.
+- `GET /health` - Health check endpoint.
 - `GET /health` - Health check & server status.
 - `POST /process` - Process a natural language request payload: `{"request": "Notepad kholo"}`.
 - `POST /confirm` - Confirm a pending tool action: `{"token": "xyz", "approved": true}`.
