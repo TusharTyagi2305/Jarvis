@@ -62,7 +62,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - `screen_find_element`: Bounding box detection for clicking buttons and UI controls.
 
 6. **Playwright Browser Automation & Session Reuse**:
-   - Smart persistent browser session reuse to prevent opening duplicate windows.
+   - Persistent Chromium session reuse to prevent opening duplicate windows.
    - Built-in smart selectors for YouTube search, channel navigation, video playback, and web browsing.
    - Comprehensive browser tools: `browser_open`, `browser_navigate`, `browser_search`, `browser_click`, `browser_type`, `browser_scroll`, `browser_screenshot`, and `browser_download`.
 
