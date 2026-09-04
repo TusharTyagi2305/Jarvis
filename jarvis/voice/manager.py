@@ -89,21 +89,26 @@ class VoiceManager:
             pass
 
         # Check for wake word prefix if text contains it
-        if text.lower().startswith(settings.wake_word.lower()):
-            clean_text = text[len(settings.wake_word):].strip(", ").strip()
-            if not clean_text:
-                self.set_state(MicState.WAKE_DETECTED)
-                wake_resp = ResponseFormatter.format_wake_response(text)
-                self.speak_response(wake_resp)
-                self.set_state(MicState.LISTENING)
-                return AgentResponse(
-                    user_request=text,
-                    final_response=wake_resp,
-                    iterations=0,
-                    plan=None,
-                    success=True
-                )
-            text = clean_text
+        kw = settings.wake_word.lower()
+        text_lower = text.lower()
+        prefixes = [f"hey {kw}", f"ok {kw}", f"okay {kw}", f"{kw} please", kw]
+        for pfx in prefixes:
+            if text_lower.startswith(pfx):
+                clean_text = text[len(pfx):].strip(", ").strip()
+                if not clean_text:
+                    self.set_state(MicState.WAKE_DETECTED)
+                    wake_resp = ResponseFormatter.format_wake_response(text)
+                    self.speak_response(wake_resp)
+                    self.set_state(MicState.LISTENING)
+                    return AgentResponse(
+                        user_request=text,
+                        final_response=wake_resp,
+                        iterations=0,
+                        plan=None,
+                        success=True
+                    )
+                text = clean_text
+                break
 
         # 2. Agent Command Processing
         self.set_state(MicState.PROCESSING)
@@ -126,15 +131,12 @@ class VoiceManager:
         Pauses background microphone listener during playback to prevent feedback loops.
         """
         self.set_state(MicState.SPEAKING)
-        bg_voice = None
-        try:
-            from jarvis.launcher import JarvisLauncher
-            # Attempt to locate active launcher background voice listener
-            from jarvis.voice.background import BackgroundVoiceListener
-        except Exception:
-            pass
+        bg_voice = getattr(self, "bg_voice", None)
 
         try:
+            if bg_voice and hasattr(bg_voice, "pause_for_tts"):
+                bg_voice.pause_for_tts()
+
             from jarvis.api.websocket import ws_manager
             from jarvis.api.events import SpeechStartedEvent, SpeechCompletedEvent
             ws_manager.broadcast_event_sync(SpeechStartedEvent(text=text))
@@ -143,6 +145,11 @@ class VoiceManager:
             return success
         except Exception:
             return self.tts.speak(text)
+        finally:
+            if bg_voice and hasattr(bg_voice, "resume_after_tts"):
+                bg_voice.resume_after_tts()
+            next_state = MicState.WAKE_LISTENING if settings.wake_word_enabled else MicState.IDLE
+            self.set_state(next_state)
 
     def interrupt_speech(self):
         """

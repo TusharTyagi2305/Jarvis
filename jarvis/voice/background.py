@@ -51,11 +51,13 @@ class BackgroundVoiceListener:
 
     def pause_for_tts(self):
         self._is_paused_for_tts = True
+        self._tts_pause_timestamp = time.time()
         if self.current_state not in ("STOPPED", "ERROR"):
             self.current_state = "SPEAKING"
 
     def resume_after_tts(self):
         self._is_paused_for_tts = False
+        self._tts_pause_timestamp = 0
         if self._is_running and self.current_state != "STOPPED":
             self.current_state = "WAKE_LISTENING"
 
@@ -157,11 +159,11 @@ class BackgroundVoiceListener:
             sd.wait()
             rms = float(np.sqrt(np.mean(amb_recording.astype(np.float64) ** 2)))
             self.ambient_baseline = round(rms, 2)
-            calculated_thresh = max(150, min(1000, int(rms * 1.25)))
+            calculated_thresh = max(15, min(300, int(rms * 1.02)))
             self.energy_threshold = calculated_thresh
         except Exception as ex:
             logger.warning(f"[VOICE] Ambient calibration recording warning: {ex}")
-            self.ambient_baseline = 10
+            self.ambient_baseline = 5
             self.energy_threshold = settings.voice_energy_threshold
 
         if settings.voice_debug:
@@ -172,13 +174,20 @@ class BackgroundVoiceListener:
         self.consecutive_errors = 0
 
         # 2. Continuous Wake Listening Loop over persistent hardware mic stream
-        chunk_duration = 3.5
+        chunk_duration = 1.8
         chunk_samples = int(chunk_duration * self.sample_rate)
+        self._tts_pause_timestamp = 0
 
         while self._is_running:
+            # Safety timeout: Auto-resume listening if paused for TTS for more than 5 seconds
             if self._is_paused_for_tts:
-                time.sleep(0.2)
-                continue
+                if self._tts_pause_timestamp > 0 and (time.time() - self._tts_pause_timestamp > 5.0):
+                    logger.info("[VOICE] Auto-resuming mic listener after TTS timeout.")
+                    self._is_paused_for_tts = False
+                    self._tts_pause_timestamp = 0
+                else:
+                    time.sleep(0.2)
+                    continue
 
             # Check if conversation mode is active
             in_conversation_mode = settings.voice_conversation_mode and (time.time() < getattr(self, "conversation_mode_until", 0))
@@ -193,18 +202,34 @@ class BackgroundVoiceListener:
                     time.sleep(0.1)
                     continue
 
-                # Optimized low-overhead audio frame energy calculation
+                # Sensitive low-overhead audio frame energy calculation
                 chunk_rms = float(np.mean(np.abs(rec_data)))
                 
-                # Check if audio frame energy exceeds baseline threshold
-                if chunk_rms >= max(10.0, self.ambient_baseline * 1.05):
+                # Adaptive background noise tracking during quiet moments
+                if chunk_rms < max(10.0, self.ambient_baseline * 1.02):
+                    self.ambient_baseline = round(0.92 * self.ambient_baseline + 0.08 * chunk_rms, 2)
+
+                # Check if audio frame energy exceeds sensitive baseline threshold (whisper & normal voice enabled)
+                if chunk_rms >= max(2.0, self.ambient_baseline * 1.01):
                     pcm_bytes = rec_data.tobytes()
                     audio_obj = sr.AudioData(pcm_bytes, self.sample_rate, 2)
 
+                    text = ""
+                    # Primary language recognition pass (e.g. hi-IN)
                     try:
                         text = recognizer.recognize_google(audio_obj, language=settings.voice_language).strip()
+                    except sr.UnknownValueError:
+                        # Dual-pass STT fallback: Try en-IN for Hinglish/English phrases if hi-IN returned empty
+                        try:
+                            text = recognizer.recognize_google(audio_obj, language="en-IN").strip()
+                        except Exception:
+                            text = ""
+                    except Exception as re:
+                        logger.warning(f"[VOICE] Primary STT API warning: {re}")
+
+                    if text:
                         if settings.voice_debug:
-                            logger.info(f"[VOICE] Captured final transcript: '{text}' (RMS: {chunk_rms:.2f})")
+                            logger.info(f"[VOICE] Captured transcript: '{text}' (RMS: {chunk_rms:.2f})")
 
                         # If in active conversation mode or wake word is detected
                         if in_conversation_mode or self.detector.detect(text, target_keyword=settings.wake_word):
@@ -212,15 +237,9 @@ class BackgroundVoiceListener:
                             self.current_state = "WAKE_DETECTED"
                             self.conversation_mode_until = time.time() + settings.voice_conversation_timeout_seconds
                             self._trigger_wake_action(text)
-                            time.sleep(0.5)
+                            time.sleep(0.3)
                             if self._is_running and not self._is_paused_for_tts:
                                 self.current_state = "WAKE_LISTENING"
-
-                    except sr.UnknownValueError:
-                        pass
-                    except sr.RequestError as re:
-                        logger.warning(f"[VOICE] STT API request warning: {re}")
-                        time.sleep(0.5)
 
                 time.sleep(0.05)
 
@@ -237,7 +256,7 @@ class BackgroundVoiceListener:
             self.current_state = "CALIBRATING"
             recognizer.adjust_for_ambient_noise(source, duration=settings.voice_ambient_calibration_seconds)
             self.ambient_baseline = int(recognizer.energy_threshold)
-            self.energy_threshold = max(150, min(1000, int(self.ambient_baseline * 1.15)))
+            self.energy_threshold = max(30, min(300, int(self.ambient_baseline * 1.02)))
             recognizer.energy_threshold = self.energy_threshold
             self.current_state = "WAKE_LISTENING"
             self.consecutive_errors = 0
@@ -274,17 +293,20 @@ class BackgroundVoiceListener:
             import urllib.request
             import json
 
-            # Inline Command Extraction: "Jarvis, open Notepad" -> "open Notepad"
+            # Inline Command Extraction: "Bharu, open Notepad" -> "open Notepad"
+            kw = settings.wake_word.lower()
             clean_cmd = ""
-            for kw in ["jarvis", "hey jarvis", "jarvis please", "ok jarvis", "okay jarvis"]:
-                if kw in transcript.lower():
-                    idx = transcript.lower().find(kw)
-                    rem = transcript[idx + len(kw):].strip(", ").strip()
+            for pfx in [f"hey {kw}", f"ok {kw}", f"okay {kw}", f"{kw} please", kw]:
+                if pfx in transcript.lower():
+                    idx = transcript.lower().find(pfx)
+                    rem = transcript[idx + len(pfx):].strip(", ").strip()
                     if rem:
                         clean_cmd = rem
                         break
 
-            payload = json.dumps({"text_override": clean_cmd if clean_cmd else None}).encode("utf-8")
+            # Send transcript or extracted command directly to avoid double microphone reading
+            payload_text = clean_cmd if clean_cmd else transcript
+            payload = json.dumps({"text_override": payload_text}).encode("utf-8")
             req = urllib.request.Request(
                 f"http://{settings.api_host}:{settings.api_port}/api/voice/listen",
                 data=payload,

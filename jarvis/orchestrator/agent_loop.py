@@ -158,7 +158,7 @@ class JarvisOrchestrator:
         messages: List[Dict[str, Any]] = []
         for turn in active_context.conversation_turns:
             messages.append({"role": turn["role"], "content": turn["content"]})
-        messages.append({"role": user_request, "content": augmented_request})
+        messages.append({"role": "user", "content": augmented_request})
         
         plan = ExecutionPlan(user_request=user_request)
         iteration = 0

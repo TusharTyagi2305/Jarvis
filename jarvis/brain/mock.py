@@ -24,7 +24,8 @@ class MockLLMProvider(BaseLLMProvider):
         if last_msg.get("role") == "tool":
             content = last_msg.get("content", "")
             tool_name = last_msg.get("name", "")
-            user_req = messages[0].get("content", "") if messages else ""
+            user_msgs = [m.get("content", "") for m in messages if m.get("role") == "user"]
+            user_req = user_msgs[-1] if user_msgs else ""
             clean_resp = ResponseFormatter.format_tool_result(tool_name, content, user_req)
             return LLMResponse(
                 content=clean_resp,
@@ -32,8 +33,8 @@ class MockLLMProvider(BaseLLMProvider):
             )
 
         user_text = str(last_msg.get("content", "")).lower()
-        if ":" in user_text:
-            user_text = user_text.split(":")[-1].strip()
+        if user_text.startswith("user:") or user_text.startswith("system:"):
+            user_text = user_text.split(":", 1)[1].strip()
 
         # 1. System / Hardware Info Parsing
         if "battery" in user_text or "system" in user_text or "ram" in user_text or "cpu" in user_text:
@@ -54,6 +55,14 @@ class MockLLMProvider(BaseLLMProvider):
             app = "chrome" if "chrome" in user_text else ("calc" if "calc" in user_text or "calculator" in user_text else "vscode")
             return LLMResponse(
                 tool_calls=[ToolCallRequest(tool_name="open_application", args={"app_name": app})]
+            )
+
+        # 3. Typing / Writing Intent Parsing
+        raw_user_text = str(last_msg.get("content", "")).lower()
+        if any(kw in raw_user_text for kw in ["likho", "write", "type"]):
+            text_to_type = raw_user_text.split(":")[-1].strip() if ":" in raw_user_text else raw_user_text
+            return LLMResponse(
+                tool_calls=[ToolCallRequest(tool_name="create_file", args={"file_path": "note.txt", "content": text_to_type})]
             )
 
         # 3. Contextual Follow-Ups (Channel, Video, Play)
@@ -120,12 +129,6 @@ class MockLLMProvider(BaseLLMProvider):
         if "remember" in user_text or "memory" in user_text or ("what is my" in user_text and "project" in user_text) or "mera main project" in user_text:
             return LLMResponse(
                 tool_calls=[ToolCallRequest(tool_name="memory_search", args={"query": user_text})]
-            )
-
-        # 7. File Operations / Writing Parsing
-        if any(kw in user_text for kw in ["likho", "write", "type"]):
-            return LLMResponse(
-                tool_calls=[ToolCallRequest(tool_name="open_application", args={"app_name": "notepad"})]
             )
 
         # Contextual relevant response (NO generic reset greeting)

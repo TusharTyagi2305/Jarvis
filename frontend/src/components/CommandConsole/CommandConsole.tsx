@@ -104,7 +104,8 @@ export const CommandConsole: React.FC<CommandConsoleProps> = ({
           if (
             transcript.includes("jarvis") ||
             transcript.includes("hey jarvis") ||
-            transcript.includes("ok jarvis")
+            transcript.includes("ok jarvis") ||
+            transcript.includes("okay jarvis")
           ) {
             handleWakeWordDetected();
             break;
@@ -119,7 +120,15 @@ export const CommandConsole: React.FC<CommandConsoleProps> = ({
           onMicStateChange?.("PERMISSION_REQUIRED");
           onMicPermissionError?.("Microphone permission denied.");
         } else if (err.error !== "no-speech") {
-          console.warn("Wake word listener error:", err.error);
+          console.warn("Wake word listener notice:", err.error);
+          // Auto-recover after temporary speech recognition error
+          setTimeout(() => {
+            if (permissionGranted !== false && !isTtsSpeakingRef.current) {
+              setMicState("WAKE_LISTENING");
+              onMicStateChange?.("WAKE_LISTENING");
+              startWakeWordListener();
+            }
+          }, 600);
         }
       };
 
@@ -297,7 +306,11 @@ export const CommandConsole: React.FC<CommandConsoleProps> = ({
       case "SPEAKING":
         return "SPEAKING";
       case "ERROR":
-        return "MICROPHONE ERROR";
+        // Auto-heal micState back to WAKE_LISTENING after brief timeout
+        setTimeout(() => {
+          if (micState === "ERROR") setMicState("WAKE_LISTENING");
+        }, 800);
+        return "READY";
       default:
         return statusMessage || "READY";
     }
@@ -347,6 +360,26 @@ export const CommandConsole: React.FC<CommandConsoleProps> = ({
           </button>
         </div>
       </form>
+      <div className="mic-live-indicator-bar">
+        {(micState === "WAKE_LISTENING" || micState === "LISTENING") && (
+          <div className="audio-wave-anim">
+            <span className="wave-bar"></span>
+            <span className="wave-bar"></span>
+            <span className="wave-bar"></span>
+            <span className="wave-bar"></span>
+            <span className="wave-text">🎙️ JARVIS IS LISTENING (Say "Jarvis" or type command)</span>
+          </div>
+        )}
+        {micState === "TRANSCRIBING" && (
+          <div className="audio-status-msg active">🗣️ CAPTURING SPEECH...</div>
+        )}
+        {micState === "PROCESSING" && (
+          <div className="audio-status-msg processing">⚙️ JARVIS IS PROCESSING COMMAND...</div>
+        )}
+        {micState === "SPEAKING" && (
+          <div className="audio-status-msg speaking">🔊 JARVIS IS RESPONDING...</div>
+        )}
+      </div>
       {permissionGranted === false && (
         <div className="mic-permission-banner">
           ⚠️ MICROPHONE PERMISSION REQUIRED: Please click the mic icon or allow microphone access in your browser location bar to enable hands-free "Jarvis" wake word.

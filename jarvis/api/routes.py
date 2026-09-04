@@ -75,6 +75,15 @@ async def command_endpoint(request: CommandRequest):
     response = orchestrator.run(
         user_request=request.command
     )
+
+    # Speak response and emit TTS WebSocket event
+    from jarvis.brain.response_formatter import ResponseFormatter
+    spoken_text = ResponseFormatter.format_final_response(response.final_response, user_request=request.command)
+    if response.pending_confirmation:
+        spoken_text = f"Action {response.pending_confirmation['tool_name']} requires confirmation."
+    
+    voice_manager.speak_response(spoken_text)
+
     return {
         "status": "completed" if response.success else ("confirmation_required" if response.pending_confirmation else "failed"),
         "task_id": f"task_{int(time.time()*1000)}",

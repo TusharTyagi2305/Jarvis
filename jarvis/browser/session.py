@@ -25,8 +25,13 @@ class BrowserSession:
         """
         Ensures Playwright browser instance is initialized and running.
         """
-        if self._browser and self._browser.is_connected():
-            return
+        if self._browser and self._browser.is_connected() and self._context:
+            try:
+                # Verify context is alive
+                _ = self._context.pages
+                return
+            except Exception:
+                logger.warning("Browser context disconnected. Re-initializing session...")
 
         try:
             from playwright.sync_api import sync_playwright
@@ -50,11 +55,27 @@ class BrowserSession:
 
     def get_active_page(self):
         self.ensure_browser()
+        # Clean up any closed pages
+        self._pages = [p for p in self._pages if not p.is_closed()]
+
         if not self._pages or self._active_page_index < 0 or self._active_page_index >= len(self._pages):
-            page = self._context.new_page()
+            try:
+                page = self._context.new_page()
+            except Exception:
+                # If context crashed/closed, force re-initialize
+                self._browser = None
+                self._context = None
+                self.ensure_browser()
+                page = self._context.new_page()
             self._pages.append(page)
             self._active_page_index = len(self._pages) - 1
-        return self._pages[self._active_page_index]
+
+        active_page = self._pages[self._active_page_index]
+        if active_page.is_closed():
+            active_page = self._context.new_page()
+            self._pages[self._active_page_index] = active_page
+
+        return active_page
 
     def new_tab(self, url: Optional[str] = None):
         self.ensure_browser()

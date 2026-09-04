@@ -86,16 +86,6 @@ export const Dashboard: React.FC = () => {
 
       case "speech_started":
         setAgentState("SPEAKING");
-        if (event.text && window.speechSynthesis) {
-          try {
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(event.text);
-            utterance.lang = "en-IN";
-            window.speechSynthesis.speak(utterance);
-          } catch (e) {
-            console.warn("Browser TTS error:", e);
-          }
-        }
         break;
 
       case "speech_completed":

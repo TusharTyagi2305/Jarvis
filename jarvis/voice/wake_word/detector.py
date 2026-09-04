@@ -7,7 +7,7 @@ logger = logging.getLogger("jarvis.voice.wake_word")
 class KeywordWakeWordDetector(BaseWakeWordDetector):
     """
     Wake word detector that checks for target keyword in audio streams or transcribed text.
-    Default keyword: 'jarvis'
+    Default keyword: 'bharu'
     """
 
     def __init__(self, keyword: str = "jarvis"):
@@ -18,5 +18,8 @@ class KeywordWakeWordDetector(BaseWakeWordDetector):
         if not audio_chunk:
             return False
         text_val = str(audio_chunk).lower().strip()
-        variations = [kw, f"hey {kw}", f"{kw} please", f"ok {kw}"]
+        variations = [
+            kw, f"hey {kw}", f"ok {kw}", f"okay {kw}", f"{kw} please",
+            "जार्विस", "हे जार्विस", "ओके जार्विस", "जार्विस प्लीज", "जारविस"
+        ]
         return any(var in text_val for var in variations)

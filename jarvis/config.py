@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     voice_timeout_seconds: int = Field(default=8, validation_alias="VOICE_TIMEOUT_SECONDS")
     conversation_timeout_seconds: int = Field(default=8, validation_alias="CONVERSATION_TIMEOUT_SECONDS")
     voice_input_device: str = Field(default="default", validation_alias="VOICE_INPUT_DEVICE")
-    voice_energy_threshold: int = Field(default=300, validation_alias="VOICE_ENERGY_THRESHOLD")
+    voice_energy_threshold: int = Field(default=80, validation_alias="VOICE_ENERGY_THRESHOLD")
     voice_dynamic_energy: bool = Field(default=True, validation_alias="VOICE_DYNAMIC_ENERGY")
     voice_ambient_calibration_seconds: float = Field(default=1.5, validation_alias="VOICE_AMBIENT_CALIBRATION_SECONDS")
     voice_debug: bool = Field(default=True, validation_alias="VOICE_DEBUG")

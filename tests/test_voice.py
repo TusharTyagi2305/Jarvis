@@ -24,10 +24,16 @@ def test_tts_provider():
 
 def test_wake_word_detector():
     detector = KeywordWakeWordDetector(keyword="jarvis")
+    assert detector.detect("Jarvis") is True
+    assert detector.detect("jarvis") is True
+    assert detector.detect("JARVIS") is True
     assert detector.detect("Hey Jarvis, what is the battery level?") is True
     assert detector.detect("jarvis please open youtube") is True
     assert detector.detect("ok jarvis search google") is True
+    assert detector.detect("okay jarvis search youtube") is True
     assert detector.detect("Hello world") is False
+    assert detector.detect("Hey Alexa, open Notepad") is False
+    assert detector.detect("alexa") is False
 
 def test_mic_state_enum():
     assert MicState.DISABLED.value == "DISABLED"
@@ -42,9 +48,9 @@ def test_voice_manager_execution_cycle(tmp_path):
         audit_logger=audit_logger
     )
 
-    stt = MockSTTProvider(preset_transcript="Jarvis, check battery")
+    stt = MockSTTProvider(preset_transcript="Bharu, check battery")
     tts = MockTTSProvider()
-    detector = KeywordWakeWordDetector(keyword="jarvis")
+    detector = KeywordWakeWordDetector(keyword="bharu")
 
     manager = VoiceManager(
         orchestrator=orchestrator,
@@ -96,8 +102,8 @@ def test_inline_wake_command_parsing():
     bg = BackgroundVoiceListener()
 
     clean_cmd = ""
-    transcript = "Jarvis, open YouTube and search hasmob002"
-    for kw in ["jarvis", "hey jarvis", "jarvis please", "ok jarvis", "okay jarvis"]:
+    transcript = "Bharu, open YouTube and search hasmob002"
+    for kw in ["bharu", "hey bharu", "bharu please", "ok bharu", "okay bharu"]:
         if kw in transcript.lower():
             idx = transcript.lower().find(kw)
             rem = transcript[idx + len(kw):].strip(", ").strip()

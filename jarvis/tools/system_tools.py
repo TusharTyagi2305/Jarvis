@@ -134,13 +134,18 @@ class OpenApplicationTool(BaseTool):
             "notepad": "notepad",
             "calc": "calc",
             "calculator": "calc",
-            "explorer": "explorer"
+            "explorer": "explorer",
+            "youtube": "https://www.youtube.com",
+            "google": "https://www.google.com"
         }
 
         target = app_aliases.get(app_name.lower(), app_name)
 
         try:
-            if platform.system() == "Windows":
+            if target.startswith("http://") or target.startswith("https://"):
+                import webbrowser
+                webbrowser.open(target)
+            elif platform.system() == "Windows":
                 # Use os.system or subprocess with shell=True for start
                 if target.startswith("start "):
                     subprocess.Popen(target, shell=True)

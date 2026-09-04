@@ -17,8 +17,8 @@ class NavigationManager:
         if not url.startswith("http://") and not url.startswith("https://"):
             url = f"https://{url}"
 
-        page = self.session.get_active_page()
         try:
+            page = self.session.get_active_page()
             response = page.goto(url, timeout=15000, wait_until="commit")
             status = response.status if response else 200
             title = page.title()
@@ -30,12 +30,23 @@ class NavigationManager:
                 "status": status
             }
         except Exception as e:
-            logger.error(f"Failed to navigate to '{url}': {e}")
-            return {
-                "success": False,
-                "url": url,
-                "error": str(e)
-            }
+            err_str = str(e)
+            logger.warning(f"Playwright navigation exception for '{url}': {err_str}. Launching default system browser...")
+            try:
+                import webbrowser
+                webbrowser.open(url)
+                return {
+                    "success": True,
+                    "url": url,
+                    "title": f"Opened {url}",
+                    "status": 200
+                }
+            except Exception as wb_ex:
+                return {
+                    "success": False,
+                    "url": url,
+                    "error": str(wb_ex)
+                }
 
     def search(self, query: str, engine: str = "google") -> Dict[str, Any]:
         encoded_query = urllib.parse.quote_plus(query)

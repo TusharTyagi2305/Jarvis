@@ -206,7 +206,9 @@ class JarvisLauncher:
         # 6. Background Voice Listener
         try:
             from jarvis.voice.background import BackgroundVoiceListener
+            from jarvis.api.routes import voice_manager
             self.bg_voice = BackgroundVoiceListener()
+            voice_manager.bg_voice = self.bg_voice
             self.bg_voice.start()
             print("Background Voice Listener active ('Jarvis')...\n")
         except Exception as e:

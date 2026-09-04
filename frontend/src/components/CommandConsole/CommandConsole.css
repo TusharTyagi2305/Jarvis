@@ -136,3 +136,58 @@
   padding: 8px 14px;
   text-align: center;
 }
+
+.mic-live-indicator-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  min-height: 22px;
+}
+
+.audio-wave-anim {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wave-bar {
+  width: 3px;
+  height: 14px;
+  background: var(--accent-cyan);
+  border-radius: 2px;
+  animation: wave-bounce 1.2s infinite ease-in-out;
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.wave-bar:nth-child(1) { animation-delay: 0.0s; }
+.wave-bar:nth-child(2) { animation-delay: 0.2s; }
+.wave-bar:nth-child(3) { animation-delay: 0.4s; }
+.wave-bar:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes wave-bounce {
+  0%, 100% { height: 6px; opacity: 0.5; }
+  50% { height: 18px; opacity: 1; }
+}
+
+.wave-text {
+  font-family: var(--font-hud);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+
+.audio-status-msg {
+  font-family: var(--font-hud);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.audio-status-msg.active { color: #00a2ff; }
+.audio-status-msg.processing { color: var(--accent-amber); }
+.audio-status-msg.speaking { color: var(--accent-green); }

@@ -146,10 +146,10 @@ class ResponseFormatter:
             target = str(data.get("target", "")).lower()
 
             if "youtube" in req_lower or "youtube" in url or "channel" in target or "video" in target:
-                if "channel" in req_lower or "channel" in target:
-                    return "Channel खोल दिया." if is_hindi else "Channel opened."
-                elif "popular" in req_lower or "video" in req_lower or "chala" in req_lower or "most watched" in target or "video" in target:
+                if "popular" in req_lower or "video" in req_lower or "chala" in req_lower or "most watched" in target or "popular" in target:
                     return "Popular video चला दिया." if is_hindi else "Playing popular video."
+                elif "channel" in req_lower or "channel" in target:
+                    return "Channel खोल दिया." if is_hindi else "Channel opened."
                 elif "search" in req_lower or query:
                     q_str = query or "search"
                     return f"{q_str} ke results mil gaye." if is_hindi else f"Found results for {q_str}."
