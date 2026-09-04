@@ -240,7 +240,7 @@ npm run build
 - [x] **Phase 4**: Playwright Browser Agent & Tab Reuse Engine (`browser_navigate`, `browser_search`, `browser_click`).
 - [x] **Phase 5**: Computer Vision & Multimodal Screen Understanding (`screen_capture`, Gemini 2.5 `screen_analyze`).
 - [x] **Phase 6**: Persistent Memory Subsystem (`data/memory/jarvis_memory.db` SQLite & Semantic Working Memory).
-- [x] **Phase 7**: Production System Tray Integration & Single-Instance Windows Launcher.
+- [x] **Phase 7**: Production Windows System Tray (`pystray`) integration and single-instance launcher.
 - [x] **Phase 8**: Hindi-First Natural Conversational Intelligence & Dedicated ResponseFormatter (Zero raw debug dict leaks).
 
 ---
