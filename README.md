@@ -124,6 +124,8 @@ Jarvis/
 ### 1. Backend Setup
 Install Python dependencies:
 ```bash
+python -m venv venv
+.\venv\Scripts\activate
 pip install -e .[dev]
 ```
 Configure `.env` (optional; if omitted, MockLLMProvider runs offline):
