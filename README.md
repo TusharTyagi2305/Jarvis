@@ -22,6 +22,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 ## 🌟 Primary Capabilities
 
 1. **Hindi-First & Natural Conversational Intelligence**:
+   - Default wake word activation: **`JARVIS`** (supports variations: *"Hey Jarvis"*, *"Jarvis please"*, *"Ji sir?"*).
    - Native support for Hindi (`hi-IN`), Hinglish, and English with automatic language detection (`JARVIS_AUTO_LANGUAGE_DETECTION=true`).
    - Iron-Man style natural responses capped to 1 concise sentence by default (e.g., `"Notepad खोल दिया."`, `"hasmob002 ke results mil gaye."`).
    - Proper noun protection ensuring tech terms (YouTube, VS Code, GitHub, Notepad) remain pristine.
