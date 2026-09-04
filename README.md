@@ -250,3 +250,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- Commit 7/30: docs: detail system control tools (get_system_info, open_application) -->
 
 <!-- Commit 8/30: docs: detail file system management capabilities -->
+
+<!-- Commit 9/30: docs: expand Gemini 2.5 screen vision analysis section -->
