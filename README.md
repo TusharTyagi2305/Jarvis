@@ -147,6 +147,7 @@ Navigate to the `frontend/` folder and start Vite:
 cd frontend
 npm install
 npm run dev
+# Dashboard available at http://localhost:5173
 ```
 Open your browser at `http://localhost:5173` to interact with the JARVIS HUD Dashboard!
 
