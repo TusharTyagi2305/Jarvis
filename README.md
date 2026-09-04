@@ -19,6 +19,15 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
 
 ---
 
+## 🎙 Audio Calibration & Energy Tuning
+
+If JARVIS is not hearing your voice speech input:
+1. Check `VOICE_ENERGY_THRESHOLD` in `.env` (default: `80`).
+2. Lower threshold (e.g., `50`) for quiet microphones.
+3. Increase threshold (e.g., `150`) for noisy background environments.
+
+---
+
 ## 🌟 Primary Capabilities
 
 1. **Hindi-First & Natural Conversational Intelligence**:
