@@ -162,6 +162,7 @@ Open your browser at `http://localhost:5173` to interact with the JARVIS HUD Das
 | `GEMINI_API_KEY` | `""` | Google Gemini API key (runs offline mock if empty) |
 | `LLM_MODEL` | `gemini-2.5-flash` | Primary generative LLM model |
 | `MAX_AGENT_ITERATIONS` | `10` | Maximum agent planning & execution steps |
+| `VOICE_ENERGY_THRESHOLD` | `80` | Microphone activation energy threshold |
 
 ---
 
