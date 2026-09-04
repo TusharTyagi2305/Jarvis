@@ -67,7 +67,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - Comprehensive browser tools: `browser_open`, `browser_navigate`, `browser_search`, `browser_click`, `browser_type`, `browser_scroll`, `browser_screenshot`, and `browser_download`.
 
 7. **Security & 3-Tier Permission Engine**:
-   - **`SAFE`**: Read-only operations, system telemetry, memory lookups, and browser navigations execute automatically.
+   - **`SAFE`**: Read-only operations (telemetry, memory search, page navigation) execute automatically without user prompting.
    - **`CONFIRM`**: Modifying operations (file creation/deletion, memory updates, downloads) request explicit user token confirmation via the UI modal.
    - **`DANGEROUS`**: Dangerous commands (unrestricted shell execution, formatting, root deletion) require explicit double-step authorization.
 8. **Dedicated ResponseFormatter & Clean Output Guarantee**:
