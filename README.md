@@ -95,6 +95,7 @@ Jarvis/
 ├── .env.example              # Template environment file
 ├── pyproject.toml            # Backend dependencies & pytest config
 ├── jarvis.spec               # PyInstaller executable build spec
+├── scratch/                  # Maintenance and build automation scripts
 ├── README.md                 # Project documentation
 ├── jarvis/
 │   ├── config.py             # Pydantic settings schema & settings manager
