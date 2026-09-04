@@ -71,6 +71,7 @@ An Iron-Man-inspired personal desktop AI assistant built with Python, FastAPI, a
    - **`CONFIRM`**: Modifying operations (file creation/deletion, memory updates, downloads) request explicit user token confirmation via the UI modal.
    - **`DANGEROUS`**: Dangerous commands (unrestricted shell execution, formatting, root deletion) require explicit double-step authorization.
 8. **Dedicated ResponseFormatter & Clean Output Guarantee**:
+   - Sanitizes tool dictionaries into human speech (e.g., converts status 200 into *"YouTube khol diya."*).
    - Intercepts raw Python dictionaries, status codes (`200`, `404`), JSON schemas, and Playwright tracebacks before TTS or user chat display.
    - Converts internal tool execution results into natural conversational Hindi/English sentences.
    - Ensures the user **NEVER** hears or sees raw debug output like `{'success': True, 'url': ...}`.
